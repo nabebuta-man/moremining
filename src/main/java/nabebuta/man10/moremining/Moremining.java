@@ -39,7 +39,8 @@ public class Moremining extends JavaPlugin implements Listener {
         this.getServer().getPluginManager().registerEvents(this, this);
         getLogger().info("Hello World!!");
         getCommand("nabestick").setExecutor(this);
-        Tokei tk = new Tokei();
+        Timer tk = new Timer();
+        tk.setJp(this);
         Thread tok = new Thread(tk);
         tok.start();
     }
@@ -115,7 +116,7 @@ public class Moremining extends JavaPlugin implements Listener {
                         if (event.getAction() == Action.RIGHT_CLICK_BLOCK){
                             Location bl = b.getLocation();
                             String bls = String.valueOf(bl);
-                            data.execute("insert into effect_location values ( '" + bls + "')");//新しく追加した分、間違ってたらここ
+                            data.execute("insert into effect_location values ( '" + bls + "')");
 
                     bl.getWorld().spawnParticle(
                             Particle.VILLAGER_HAPPY, // パーティクルの種類
