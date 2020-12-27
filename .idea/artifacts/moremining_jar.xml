@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="moremining:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/moremining_jar</output-path>
+    <root id="archive" name="moremining.jar">
+      <element id="module-output" name="moremining" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/mysql-connector-java-8.0.22.jar" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+    </root>
+  </artifact>
+</component>

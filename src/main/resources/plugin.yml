@@ -1,0 +1,10 @@
+name: Moremining
+version: ${project.version}
+main: nabebuta.man10.moremining.Moremining
+api-version: 1.13
+
+commands:
+  nabestick:
+    description:
+      usage: /<command>
+default: op
