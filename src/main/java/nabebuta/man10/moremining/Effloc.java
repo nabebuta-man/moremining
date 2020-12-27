@@ -1,14 +1,12 @@
 package nabebuta.man10.moremining;
 
 import org.bukkit.Location;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import java.sql.ResultSet;
 
-public class Effloc extends JavaPlugin {
+public class Effloc{
     Tokei tokei = new Tokei();
-    MySQLManager data = new MySQLManager(this,"moremining");
     Moremining mrmn = new Moremining();
+    MySQLManager data = new MySQLManager(mrmn,"moremining");
     public void main(int efla) {
 
         int eli = data.count("effect_location");
