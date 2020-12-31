@@ -1,9 +1,7 @@
 package nabebuta.man10.moremining;
 
 
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Particle;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -25,8 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Moremining extends JavaPlugin implements Listener {
-    MySQLManager data = new MySQLManager(this,"moremining");
+    JavaPlugin jp = this;
+    public MySQLManager data = new MySQLManager(this,"moremining");
     FileConfiguration config = this.getConfig();
+    LinkTiEf lte = new LinkTiEf();
+    Effloc efl = new Effloc();
 
     @Override
     public void onEnable() {
@@ -39,10 +40,9 @@ public class Moremining extends JavaPlugin implements Listener {
         this.getServer().getPluginManager().registerEvents(this, this);
         getLogger().info("Hello World!!");
         getCommand("nabestick").setExecutor(this);
+        lte.setJp(this);
         Timer tk = new Timer();
-        tk.setJp(this);
-        Thread tok = new Thread(tk);
-        tok.start();
+        new Thread(tk).start();
     }
 
     @Override
@@ -115,8 +115,11 @@ public class Moremining extends JavaPlugin implements Listener {
             if (karabou.equals(myDisplayName)) {
                         if (event.getAction() == Action.RIGHT_CLICK_BLOCK){
                             Location bl = b.getLocation();
-                            String bls = String.valueOf(bl);
-                            data.execute("insert into effect_location values ( '" + bls + "')");
+                            World blw = bl.getWorld();
+                            double blx = bl.getX();
+                            double bly = bl.getY();
+                            double blz = bl.getZ();
+                            data.execute("insert into effect_location values ( '" + blw + "',"+blx+","+bly+","+blz+")");//この際mysqlにmoreminingというDB、effect_locatonというテーブル、
 
                     bl.getWorld().spawnParticle(
                             Particle.VILLAGER_HAPPY, // パーティクルの種類
@@ -130,11 +133,6 @@ public class Moremining extends JavaPlugin implements Listener {
                         else if (event.getAction() == Action.RIGHT_CLICK_AIR) {
                             return;
                         }
-
-
-
-
-
             }
         }
     }
