@@ -7,4 +7,7 @@ commands:
   nabestick:
     description:
       usage: /<command>
+  nabe_itemregister:
+    description:
+      usage: /<command>
 default: op

@@ -1,44 +1,47 @@
 package nabebuta.man10.moremining;
 
-import org.bukkit.*;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.World;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-public class Effloc{
-    LinkTiEf lte = new LinkTiEf();
-    //int i = 0;
-    Moremining plugin;
-    public void effloc(int i) {
-        JavaPlugin jp = lte.getJp();
-        //i = lte.getI();
-        int eli = plugin.data.count("effect_location");
-        lte.setI(eli);
-        if(i != 0){
-            ResultSet rs = plugin.data.query(String.format("select * from effect_location limit " + i + ", 1;"));
+public class Effloc {
+    int i = 0;
+    String eflsw;
+    double eflsx;
+    double eflsy;
+    double eflsz;
+    public void showparticle() {
+        //i = md.getI();
             try {
-                while (rs.next()) {
-                    String eflsw = rs.getString("world");
-                    double eflsx = rs.getDouble("x");
-                    double eflsy = rs.getDouble("y");
-                    double eflsz = rs.getDouble("z");
-                    World eflsnew = Bukkit.getWorld(eflsw);
-                    Location efl = new Location(eflsnew, eflsx, eflsy, eflsz);
-
-                    efl.getWorld().spawnParticle(
+                int index = eflsw.indexOf("=");
+                int indexx = eflsw.indexOf("}");
+                index=index+1;
+                World neweflsw = Bukkit.getWorld(eflsw.substring(index,indexx));
+                Location efl = new Location(neweflsw, eflsx, eflsy, eflsz);
+                efl.getWorld().spawnParticle(
                             Particle.END_ROD, // パーティクルの種類
                             efl, // 発生させる場所
-                            50,// 発生させる数
-                            0.5, // 散開させるXの範囲
-                            0.5, // 散開させるYの範囲
-                            0.5 // 散開させるZの範囲
+                            1,// 発生させる数
+                            0.2, // 散開させるXの範囲
+                            0.2, // 散開させるYの範囲
+                            0.2, // 散開させるZの範囲
+                        0
                     );
-                }rs.close();
-            } catch (SQLException e) {
+            } catch (Exception e) {
 
             }
-        }
-        jp.getLogger().info("Effloc worked");
+    }
+    public void Locationrecorder(String blw,String blx,String bly,String blz){
+        eflsw = blw;
+        eflsx = Double.parseDouble(blx)+0.5;
+        eflsy = Double.parseDouble(bly)+1.5;
+        eflsz = Double.parseDouble(blz)+0.5;
+    }
+    public int getInt(){
+        return i;
+    }
+    public void setInt(int i){
+        this.i = i;
     }
 }

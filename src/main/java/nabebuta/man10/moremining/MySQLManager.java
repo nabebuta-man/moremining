@@ -111,11 +111,12 @@ public class MySQLManager {
 
         try {
             count = set.getInt("count(*)");
-
         } catch (SQLException var5) {
             Bukkit.getLogger().log(Level.SEVERE, "Could not select all rows from table: " + table + ", error: " + var5.getErrorCode());
             return -1;
         }
+        //お試し部分
+        Bukkit.getConsoleSender().sendMessage("実行したクエリの値は" + count + "です");
 
         return count;
     }
